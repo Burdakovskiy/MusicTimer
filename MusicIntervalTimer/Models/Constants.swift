@@ -1,12 +1,12 @@
 //
-//  MainViewModel.swift
+//  Constants.swift
 //  MusicIntervalTimer
 //
 //  Created by Дмитрий on 01.08.2024.
 //
 
-import UIKit
+import Foundation
 
-final class MainViewModel {
+struct Constants {
     
 }
