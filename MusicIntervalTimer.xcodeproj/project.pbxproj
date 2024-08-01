@@ -9,19 +9,25 @@
 /* Begin PBXBuildFile section */
 		688BE2482C5B958C003720AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE2472C5B958C003720AD /* AppDelegate.swift */; };
 		688BE24A2C5B958C003720AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE2492C5B958C003720AD /* SceneDelegate.swift */; };
-		688BE24C2C5B958C003720AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE24B2C5B958C003720AD /* ViewController.swift */; };
+		688BE24C2C5B958C003720AD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE24B2C5B958C003720AD /* MainViewController.swift */; };
 		688BE2512C5B958E003720AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 688BE2502C5B958E003720AD /* Assets.xcassets */; };
 		688BE2542C5B958E003720AD /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 688BE2532C5B958E003720AD /* Base */; };
+		688BE25E2C5BCD34003720AD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE25D2C5BCD34003720AD /* MainView.swift */; };
+		688BE2602C5BCD7A003720AD /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE25F2C5BCD7A003720AD /* MainViewModel.swift */; };
+		688BE2632C5BCDB5003720AD /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE2622C5BCDB5003720AD /* TimerModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		688BE2442C5B958C003720AD /* MusicIntervalTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicIntervalTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		688BE2472C5B958C003720AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		688BE2492C5B958C003720AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		688BE24B2C5B958C003720AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		688BE24B2C5B958C003720AD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		688BE2502C5B958E003720AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		688BE2532C5B958E003720AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		688BE2552C5B958E003720AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		688BE25D2C5BCD34003720AD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		688BE25F2C5BCD7A003720AD /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		688BE2622C5BCDB5003720AD /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +60,49 @@
 		688BE2462C5B958C003720AD /* MusicIntervalTimer */ = {
 			isa = PBXGroup;
 			children = (
-				688BE2472C5B958C003720AD /* AppDelegate.swift */,
-				688BE2492C5B958C003720AD /* SceneDelegate.swift */,
-				688BE24B2C5B958C003720AD /* ViewController.swift */,
-				688BE2502C5B958E003720AD /* Assets.xcassets */,
-				688BE2522C5B958E003720AD /* LaunchScreen.storyboard */,
-				688BE2552C5B958E003720AD /* Info.plist */,
+				688BE2642C5BCE89003720AD /* Models */,
+				688BE25B2C5BCC67003720AD /* Core */,
+				688BE2612C5BCD8D003720AD /* MainScreen */,
+				688BE25C2C5BCC7F003720AD /* Appearance */,
 			);
 			path = MusicIntervalTimer;
+			sourceTree = "<group>";
+		};
+		688BE25B2C5BCC67003720AD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				688BE2472C5B958C003720AD /* AppDelegate.swift */,
+				688BE2492C5B958C003720AD /* SceneDelegate.swift */,
+				688BE2552C5B958E003720AD /* Info.plist */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		688BE25C2C5BCC7F003720AD /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				688BE2502C5B958E003720AD /* Assets.xcassets */,
+				688BE2522C5B958E003720AD /* LaunchScreen.storyboard */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
+		688BE2612C5BCD8D003720AD /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				688BE24B2C5B958C003720AD /* MainViewController.swift */,
+				688BE25D2C5BCD34003720AD /* MainView.swift */,
+				688BE25F2C5BCD7A003720AD /* MainViewModel.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		688BE2642C5BCE89003720AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				688BE2622C5BCDB5003720AD /* TimerModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,7 +175,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				688BE24C2C5B958C003720AD /* ViewController.swift in Sources */,
+				688BE2602C5BCD7A003720AD /* MainViewModel.swift in Sources */,
+				688BE24C2C5B958C003720AD /* MainViewController.swift in Sources */,
+				688BE25E2C5BCD34003720AD /* MainView.swift in Sources */,
+				688BE2632C5BCDB5003720AD /* TimerModel.swift in Sources */,
 				688BE2482C5B958C003720AD /* AppDelegate.swift in Sources */,
 				688BE24A2C5B958C003720AD /* SceneDelegate.swift in Sources */,
 			);
@@ -281,10 +325,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MusicIntervalTimer/Info.plist;
+				INFOPLIST_FILE = MusicIntervalTimer/Core/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -309,10 +352,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MusicIntervalTimer/Info.plist;
+				INFOPLIST_FILE = MusicIntervalTimer/Core/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
