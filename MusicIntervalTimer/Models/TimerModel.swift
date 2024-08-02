@@ -8,5 +8,17 @@
 import Foundation
 
 struct TimerModel {
-    
+    enum State {
+        case play, pause, stop
+    }
+    enum WorkingState {
+        case rest, work
+    }
+    var id: UUID
+    var workTime: Int
+    var restTime: Int
+    var cyclesCount: Int
+    var currentCycle: Int
+    var workingState: WorkingState
+    var state: State
 }

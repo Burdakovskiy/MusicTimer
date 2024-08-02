@@ -8,5 +8,6 @@
 import Foundation
 
 struct TemplateModel {
-    
+    var name: String
+    let timer: TimerModel
 }
