@@ -15,19 +15,7 @@ final class MainView: UIView {
     
     public weak var newTimerActionDelegate: NewTimerButtonAction?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .white
-        addViews()
-        setConstraints()
-        addActions()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    let newTimerButton: UIButton = {
+    private let newTimerButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
@@ -40,18 +28,55 @@ final class MainView: UIView {
         return button
     }()
     
-    let templatesTableView: UITableView = {
+    private let templatesTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .blue
         tableView.register(TemplateTableViewCell.self,
                            forCellReuseIdentifier: TemplateTableViewCell.cellId)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
+    private let emptyTemplateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "There is no templates"
+        label.textColor = .lightGray
+        label.font = .systemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    public func reloadTemplatesTableView() {
+        templatesTableView.reloadData()
+    }
+    
+    public func isHideEmptyLabel(_ isHide: Bool) {
+        emptyTemplateLabel.isHidden = isHide
+    }
+    
+    public func setTableViewDelegate(_ delegate: UITableViewDelegate) {
+        templatesTableView.delegate = delegate
+    }
+    
+    public func setTableViewDataSource(_ dataSource: UITableViewDataSource) {
+        templatesTableView.dataSource = dataSource
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .white
+        addViews()
+        setConstraints()
+        addActions()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func addViews() {
         addSubview(newTimerButton)
         addSubview(templatesTableView)
+        addSubview(emptyTemplateLabel)
     }
 
     private func setConstraints() {
@@ -64,7 +89,10 @@ final class MainView: UIView {
             templatesTableView.topAnchor.constraint(equalTo: newTimerButton.bottomAnchor, constant: 16),
             templatesTableView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 16),
             templatesTableView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -16),
-            templatesTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+            templatesTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
+            emptyTemplateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            emptyTemplateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
     
