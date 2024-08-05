@@ -18,8 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         let mainViewModel = TemplateViewModel()
         let mainViewController = MainViewController(mainViewModel: mainViewModel)
-        let mainNacController = UINavigationController(rootViewController: mainViewController)
-        window.rootViewController = mainNacController
+        let mainNavController = UINavigationController(rootViewController: mainViewController)
+        mainNavController.navigationBar.prefersLargeTitles = true
+        window.rootViewController = mainNavController
         window.overrideUserInterfaceStyle = .light
         self.window = window
     }

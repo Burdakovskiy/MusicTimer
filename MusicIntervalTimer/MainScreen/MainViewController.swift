@@ -29,6 +29,7 @@ final class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Main"
         setupDelegates()
         loadTemplates()
     }
@@ -52,14 +53,18 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: NewTimerButtonAction {
     func newTimerButtonAction() {
-        print("Tap")
+        let setupTimerVC = SetupTimerViewController()
+        navigationController?.pushViewController(setupTimerVC, animated: true)
     }
 }
 
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chosenTemplate = templates[indexPath.row]
-        //TODO: navigate to TimerVC
+        let timerVC = TimerViewController()
+        timerVC.timer = chosenTemplate.timer
+        timerVC.timerName = chosenTemplate.name
+        navigationController?.pushViewController(timerVC, animated: true)
     }
 }
 

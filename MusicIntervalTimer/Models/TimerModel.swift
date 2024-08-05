@@ -17,6 +17,7 @@ struct TimerModel {
     var id: UUID
     var workTime: Int
     var restTime: Int
+    var repeatsCount: Int
     var cyclesCount: Int
     var currentCycle: Int
     var workingState: WorkingState
