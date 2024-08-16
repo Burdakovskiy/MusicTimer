@@ -35,7 +35,7 @@ final class TimerView: UIView {
     
     private let audioNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Some music name"
+        label.text = ""
         label.font = .systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
