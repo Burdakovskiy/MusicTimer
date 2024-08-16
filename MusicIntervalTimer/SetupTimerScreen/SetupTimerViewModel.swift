@@ -14,7 +14,7 @@ final class SetupTimerViewModel {
     private var restSeconds = 0
     
     func getTimeInSeconds(for time: String) -> Int {
-        return 0
+        
     }
     
     func getTimeString(minutes: Int, seconds: Int) -> String {
