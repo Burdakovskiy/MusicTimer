@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct TimerModel {
-    enum State {
-        case play, pause, stop
+struct TimerModel: Codable {
+    enum State: Codable {
+        case play, pause, stop, none
     }
-    enum WorkingState {
-        case rest, work
+    enum WorkingState: Codable {
+        case rest, work, none
     }
     var id: UUID
     var workTime: Int

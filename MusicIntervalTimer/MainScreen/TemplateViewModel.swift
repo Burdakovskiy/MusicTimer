@@ -18,15 +18,17 @@ final class TemplateViewModel {
     }
     
     public func loadTemplates() {
-        
-        self.timerTemplates = [
-            //TODO: get templates from UserDefaults
-        ]
+        self.timerTemplates = TemplateStorage.getTemplates()
         didUpdateTemplates?()
     }
     
+    public func saveTemplate(_ template: TemplateModel) {
+        TemplateStorage.saveTemplate(template)
+        loadTemplates()
+    }
+    
     public func deleteTemplate(with id: UUID) {
-        
+        TemplateStorage.deleteTemplate(with: id)
     }
     
     //TODO: func updateTemplate(with id: UUID)

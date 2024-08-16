@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct TemplateModel {
+struct TemplateModel: Codable {
     var name: String
     let timer: TimerModel
+    var tracks: [Track]
 }

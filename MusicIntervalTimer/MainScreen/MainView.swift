@@ -28,6 +28,14 @@ final class MainView: UIView {
         return button
     }()
     
+    private let separatorView: UIView = {
+        let view = UIView()
+        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        view.backgroundColor = .lightGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let templatesTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(TemplateTableViewCell.self,
@@ -47,6 +55,10 @@ final class MainView: UIView {
     
     public func reloadTemplatesTableView() {
         templatesTableView.reloadData()
+    }
+    
+    public func deleteTemplate(at indexPath: IndexPath) {
+        templatesTableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     public func isHideEmptyLabel(_ isHide: Bool) {
@@ -75,6 +87,7 @@ final class MainView: UIView {
     
     private func addViews() {
         addSubview(newTimerButton)
+        addSubview(separatorView)
         addSubview(templatesTableView)
         addSubview(emptyTemplateLabel)
     }
@@ -86,7 +99,11 @@ final class MainView: UIView {
             newTimerButton.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -32),
             newTimerButton.heightAnchor.constraint(equalToConstant: 50),
             
-            templatesTableView.topAnchor.constraint(equalTo: newTimerButton.bottomAnchor, constant: 16),
+            separatorView.topAnchor.constraint(equalTo: newTimerButton.bottomAnchor, constant: 16),
+            separatorView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            separatorView.rightAnchor.constraint(equalTo: self.rightAnchor),
+            
+            templatesTableView.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 16),
             templatesTableView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 16),
             templatesTableView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -16),
             templatesTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),

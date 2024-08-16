@@ -26,12 +26,16 @@ final class MainViewController: UIViewController {
         super.loadView()
         self.view = mainView
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadTemplates()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Main"
         setupDelegates()
-        loadTemplates()
     }
     
     private func loadTemplates() {
@@ -62,9 +66,15 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chosenTemplate = templates[indexPath.row]
         let timerVC = TimerViewController()
-        timerVC.timer = chosenTemplate.timer
+        timerVC.timerModel = chosenTemplate.timer
+        timerVC.tracks = chosenTemplate.tracks
         timerVC.timerName = chosenTemplate.name
+        timerVC.isTemplate = true
         navigationController?.pushViewController(timerVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
     }
 }
 
@@ -82,6 +92,13 @@ extension MainViewController: UITableViewDataSource {
         }
         return UITableViewCell()
     }
-    
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let templateToDelete = templates[indexPath.row]
+            mainViewModel.deleteTemplate(with: templateToDelete.timer.id)
+            
+            templates.remove(at: indexPath.row)
+            mainView.deleteTemplate(at: indexPath)
+        }
+    }
 }

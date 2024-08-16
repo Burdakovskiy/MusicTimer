@@ -14,24 +14,43 @@ final class MusicView: UIView {
         backgroundColor = .white
         addViews()
         setConstraints()
-        addActions()
     }
+    
+    private let tracksTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(TrackTableViewCell.self,
+                           forCellReuseIdentifier: TrackTableViewCell.cellId)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func addViews() {
+        addSubview(tracksTableView)
     }
     
-    private func addActions() {
-        
+    public func reloadTracksTableView() {
+        tracksTableView.reloadData()
+    }
+    
+    public func setTableViewDelegate(_ delegate: UITableViewDelegate) {
+        tracksTableView.delegate = delegate
+    }
+    
+    public func setTableViewDataSource(_ dataSource: UITableViewDataSource) {
+        tracksTableView.dataSource = dataSource
     }
    
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            
+            tracksTableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            tracksTableView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor),
+            tracksTableView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor),
+            tracksTableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }

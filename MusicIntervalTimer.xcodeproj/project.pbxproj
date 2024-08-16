@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		682C76CF2C692D6D00863B16 /* TemplateStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C76CE2C692D6D00863B16 /* TemplateStorage.swift */; };
+		688B42232C611EAE00700213 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688B42222C611EAE00700213 /* UITextField+Extension.swift */; };
+		688B42252C61202000700213 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688B42242C61202000700213 /* UILabel+Extension.swift */; };
+		688B42292C61244700700213 /* UIButton+Extesion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688B42282C61244700700213 /* UIButton+Extesion.swift */; };
 		688BE2482C5B958C003720AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE2472C5B958C003720AD /* AppDelegate.swift */; };
 		688BE24A2C5B958C003720AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE2492C5B958C003720AD /* SceneDelegate.swift */; };
 		688BE24C2C5B958C003720AD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE24B2C5B958C003720AD /* MainViewController.swift */; };
@@ -17,8 +21,11 @@
 		688BE2632C5BCDB5003720AD /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE2622C5BCDB5003720AD /* TimerModel.swift */; };
 		688BE2662C5BD3AF003720AD /* TemplateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE2652C5BD3AF003720AD /* TemplateModel.swift */; };
 		688BE2682C5BDE24003720AD /* TemplateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE2672C5BDE24003720AD /* TemplateTableViewCell.swift */; };
-		688BE26A2C5BDE6C003720AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE2692C5BDE6C003720AD /* Constants.swift */; };
 		688BE26C2C5BDEC6003720AD /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688BE26B2C5BDEC6003720AD /* UITableViewCell+Extension.swift */; };
+		689BAA062C60EFE0005A9E01 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BAA052C60EFE0005A9E01 /* UIStackView+Extension.swift */; };
+		689BE5472C639888007EC14B /* TimerCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BE5462C639888007EC14B /* TimerCellModel.swift */; };
+		689BE5492C639B36007EC14B /* TimerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689BE5482C639B36007EC14B /* TimerTableViewCell.swift */; };
+		68C1E9DC2C64CDDD00DCA28C /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C1E9DB2C64CDDD00DCA28C /* AppColors.swift */; };
 		68D8EF6E2C5EB32400075202 /* SetupTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF6D2C5EB32400075202 /* SetupTimerViewController.swift */; };
 		68D8EF712C5EB93500075202 /* SetupTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF702C5EB93500075202 /* SetupTimerView.swift */; };
 		68D8EF732C5EB96B00075202 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF722C5EB96B00075202 /* MusicViewController.swift */; };
@@ -28,10 +35,16 @@
 		68D8EF7C2C5EB9AA00075202 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF7B2C5EB9AA00075202 /* TimerViewController.swift */; };
 		68D8EF7F2C5EB9BF00075202 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF7E2C5EB9BF00075202 /* TimerView.swift */; };
 		68D8EF812C5EB9C800075202 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF802C5EB9C800075202 /* TimerViewModel.swift */; };
-		68D8EF832C5EB9DA00075202 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF822C5EB9DA00075202 /* DatabaseManager.swift */; };
+		68DF86862C69B7430026137A /* AlertsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF86852C69B7430026137A /* AlertsFactory.swift */; };
+		68DF86882C6A081D0026137A /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF86872C6A081D0026137A /* TrackModel.swift */; };
+		68DF868A2C6A0B410026137A /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF86892C6A0B410026137A /* TrackTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		682C76CE2C692D6D00863B16 /* TemplateStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateStorage.swift; sourceTree = "<group>"; };
+		688B42222C611EAE00700213 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		688B42242C61202000700213 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		688B42282C61244700700213 /* UIButton+Extesion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extesion.swift"; sourceTree = "<group>"; };
 		688BE2442C5B958C003720AD /* MusicIntervalTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicIntervalTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		688BE2472C5B958C003720AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		688BE2492C5B958C003720AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,8 +57,11 @@
 		688BE2622C5BCDB5003720AD /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		688BE2652C5BD3AF003720AD /* TemplateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateModel.swift; sourceTree = "<group>"; };
 		688BE2672C5BDE24003720AD /* TemplateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateTableViewCell.swift; sourceTree = "<group>"; };
-		688BE2692C5BDE6C003720AD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		688BE26B2C5BDEC6003720AD /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		689BAA052C60EFE0005A9E01 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		689BE5462C639888007EC14B /* TimerCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCellModel.swift; sourceTree = "<group>"; };
+		689BE5482C639B36007EC14B /* TimerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerTableViewCell.swift; sourceTree = "<group>"; };
+		68C1E9DB2C64CDDD00DCA28C /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		68D8EF6D2C5EB32400075202 /* SetupTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTimerViewController.swift; sourceTree = "<group>"; };
 		68D8EF702C5EB93500075202 /* SetupTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTimerView.swift; sourceTree = "<group>"; };
 		68D8EF722C5EB96B00075202 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +71,9 @@
 		68D8EF7B2C5EB9AA00075202 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		68D8EF7E2C5EB9BF00075202 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		68D8EF802C5EB9C800075202 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
-		68D8EF822C5EB9DA00075202 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		68DF86852C69B7430026137A /* AlertsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsFactory.swift; sourceTree = "<group>"; };
+		68DF86872C6A081D0026137A /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
+		68DF86892C6A0B410026137A /* TrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +106,8 @@
 		688BE2462C5B958C003720AD /* MusicIntervalTimer */ = {
 			isa = PBXGroup;
 			children = (
-				688BE2642C5BCE89003720AD /* Models */,
 				688BE25B2C5BCC67003720AD /* Core */,
+				688BE2642C5BCE89003720AD /* Models */,
 				688BE2612C5BCD8D003720AD /* MainScreen */,
 				68D8EF6F2C5EB32900075202 /* SetupTimerScreen */,
 				68D8EF742C5EB96F00075202 /* MusicScreen */,
@@ -133,10 +151,17 @@
 			isa = PBXGroup;
 			children = (
 				688BE2622C5BCDB5003720AD /* TimerModel.swift */,
+				689BE5462C639888007EC14B /* TimerCellModel.swift */,
 				688BE2652C5BD3AF003720AD /* TemplateModel.swift */,
-				688BE2692C5BDE6C003720AD /* Constants.swift */,
 				688BE26B2C5BDEC6003720AD /* UITableViewCell+Extension.swift */,
-				68D8EF822C5EB9DA00075202 /* DatabaseManager.swift */,
+				689BAA052C60EFE0005A9E01 /* UIStackView+Extension.swift */,
+				688B42222C611EAE00700213 /* UITextField+Extension.swift */,
+				688B42242C61202000700213 /* UILabel+Extension.swift */,
+				688B42282C61244700700213 /* UIButton+Extesion.swift */,
+				68C1E9DB2C64CDDD00DCA28C /* AppColors.swift */,
+				682C76CE2C692D6D00863B16 /* TemplateStorage.swift */,
+				68DF86852C69B7430026137A /* AlertsFactory.swift */,
+				68DF86872C6A081D0026137A /* TrackModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -156,6 +181,7 @@
 			children = (
 				68D8EF722C5EB96B00075202 /* MusicViewController.swift */,
 				68D8EF752C5EB98500075202 /* MusicView.swift */,
+				68DF86892C6A0B410026137A /* TrackTableViewCell.swift */,
 				68D8EF772C5EB99000075202 /* MusicViewModel.swift */,
 			);
 			path = MusicScreen;
@@ -166,6 +192,7 @@
 			children = (
 				68D8EF7B2C5EB9AA00075202 /* TimerViewController.swift */,
 				68D8EF7E2C5EB9BF00075202 /* TimerView.swift */,
+				689BE5482C639B36007EC14B /* TimerTableViewCell.swift */,
 				68D8EF802C5EB9C800075202 /* TimerViewModel.swift */,
 			);
 			path = TimerScreen;
@@ -242,25 +269,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				68D8EF7F2C5EB9BF00075202 /* TimerView.swift in Sources */,
+				68DF86862C69B7430026137A /* AlertsFactory.swift in Sources */,
 				68D8EF782C5EB99000075202 /* MusicViewModel.swift in Sources */,
 				688BE2662C5BD3AF003720AD /* TemplateModel.swift in Sources */,
+				688B42252C61202000700213 /* UILabel+Extension.swift in Sources */,
 				68D8EF7A2C5EB99D00075202 /* SetupTimerViewModel.swift in Sources */,
+				689BE5472C639888007EC14B /* TimerCellModel.swift in Sources */,
 				688BE2602C5BCD7A003720AD /* TemplateViewModel.swift in Sources */,
+				688B42292C61244700700213 /* UIButton+Extesion.swift in Sources */,
+				68DF86882C6A081D0026137A /* TrackModel.swift in Sources */,
 				688BE24C2C5B958C003720AD /* MainViewController.swift in Sources */,
+				68C1E9DC2C64CDDD00DCA28C /* AppColors.swift in Sources */,
 				688BE25E2C5BCD34003720AD /* MainView.swift in Sources */,
 				68D8EF762C5EB98500075202 /* MusicView.swift in Sources */,
+				689BAA062C60EFE0005A9E01 /* UIStackView+Extension.swift in Sources */,
+				68DF868A2C6A0B410026137A /* TrackTableViewCell.swift in Sources */,
 				688BE2632C5BCDB5003720AD /* TimerModel.swift in Sources */,
 				688BE2682C5BDE24003720AD /* TemplateTableViewCell.swift in Sources */,
 				68D8EF6E2C5EB32400075202 /* SetupTimerViewController.swift in Sources */,
+				689BE5492C639B36007EC14B /* TimerTableViewCell.swift in Sources */,
+				682C76CF2C692D6D00863B16 /* TemplateStorage.swift in Sources */,
 				688BE2482C5B958C003720AD /* AppDelegate.swift in Sources */,
-				68D8EF832C5EB9DA00075202 /* DatabaseManager.swift in Sources */,
 				68D8EF812C5EB9C800075202 /* TimerViewModel.swift in Sources */,
 				68D8EF712C5EB93500075202 /* SetupTimerView.swift in Sources */,
 				68D8EF7C2C5EB9AA00075202 /* TimerViewController.swift in Sources */,
+				688B42232C611EAE00700213 /* UITextField+Extension.swift in Sources */,
 				68D8EF732C5EB96B00075202 /* MusicViewController.swift in Sources */,
 				688BE26C2C5BDEC6003720AD /* UITableViewCell+Extension.swift in Sources */,
 				688BE24A2C5B958C003720AD /* SceneDelegate.swift in Sources */,
-				688BE26A2C5BDE6C003720AD /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +440,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XU83GBGKSX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicIntervalTimer/Core/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -431,6 +468,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XU83GBGKSX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicIntervalTimer/Core/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
