@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class TrackTableViewCell: UITableViewCell {
+final class MusicTableViewCell: UITableViewCell {
     
     private var nameLabel: UILabel = {
         let label = UILabel()

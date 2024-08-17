@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 final class MusicViewController: UIViewController {
     
@@ -24,6 +23,7 @@ final class MusicViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupDelegates()
+        bindViewModel()
     }
     
     private func setupDelegates() {
@@ -31,9 +31,16 @@ final class MusicViewController: UIViewController {
         musicView.setTableViewDataSource(self)
     }
     
+    private func bindViewModel() {
+        musicViewModel.onTrackUpdated = {[weak self] in
+            guard let self else { return }
+            musicView.reloadTracksTableView()
+        }
+    }
+    
     private func setupNavigationBar() {
-        navigationItem.hidesBackButton = true
         title = "Tracks"
+        navigationItem.hidesBackButton = true
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
                                          target: self,
                                          action: #selector(doneButtonPressed))
@@ -46,7 +53,7 @@ final class MusicViewController: UIViewController {
                                                            action: #selector(cancelButtonPressed))
     }
     
-    @objc func addTrackPressed() {
+    @objc private func addTrackPressed() {
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.audio],
                                                             asCopy: true)
         documentPicker.delegate = self
@@ -76,7 +83,7 @@ extension MusicViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TrackTableViewCell.cellId, for: indexPath) as! TrackTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: MusicTableViewCell.cellId, for: indexPath) as! MusicTableViewCell
         let track = musicViewModel.track(at: indexPath.row)
         cell.configure(with: track)
         return cell
@@ -86,24 +93,7 @@ extension MusicViewController: UITableViewDataSource {
 extension MusicViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
-            addTrack(from: url)
+            musicViewModel.addTrack(from: url)
         }
-    }
-    
-    private func addTrack(from url: URL) {
-        guard FileManager.default.fileExists(atPath: url.path) else {
-            print("File not available locally: \(url)")
-            return
-        }
-        
-        guard url.pathExtension.lowercased() == "mp3" || url.pathExtension.lowercased() == "m4a" else {
-            print("Unsupported file format: \(url.pathExtension)")
-            return
-        }
-        let asset = AVAsset(url: url)
-        let duration = CMTimeGetSeconds(asset.duration)
-        let track = Track(title: url.lastPathComponent, duration: duration, fileURL: url)
-        musicViewModel.addTrack(track)
-        musicView.reloadTracksTableView()
     }
 }

@@ -37,7 +37,7 @@
 		68D8EF812C5EB9C800075202 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF802C5EB9C800075202 /* TimerViewModel.swift */; };
 		68DF86862C69B7430026137A /* AlertsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF86852C69B7430026137A /* AlertsFactory.swift */; };
 		68DF86882C6A081D0026137A /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF86872C6A081D0026137A /* TrackModel.swift */; };
-		68DF868A2C6A0B410026137A /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF86892C6A0B410026137A /* TrackTableViewCell.swift */; };
+		68DF868A2C6A0B410026137A /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF86892C6A0B410026137A /* MusicTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,7 +73,7 @@
 		68D8EF802C5EB9C800075202 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		68DF86852C69B7430026137A /* AlertsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsFactory.swift; sourceTree = "<group>"; };
 		68DF86872C6A081D0026137A /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
-		68DF86892C6A0B410026137A /* TrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
+		68DF86892C6A0B410026137A /* MusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +181,7 @@
 			children = (
 				68D8EF722C5EB96B00075202 /* MusicViewController.swift */,
 				68D8EF752C5EB98500075202 /* MusicView.swift */,
-				68DF86892C6A0B410026137A /* TrackTableViewCell.swift */,
+				68DF86892C6A0B410026137A /* MusicTableViewCell.swift */,
 				68D8EF772C5EB99000075202 /* MusicViewModel.swift */,
 			);
 			path = MusicScreen;
@@ -283,7 +283,7 @@
 				688BE25E2C5BCD34003720AD /* MainView.swift in Sources */,
 				68D8EF762C5EB98500075202 /* MusicView.swift in Sources */,
 				689BAA062C60EFE0005A9E01 /* UIStackView+Extension.swift in Sources */,
-				68DF868A2C6A0B410026137A /* TrackTableViewCell.swift in Sources */,
+				68DF868A2C6A0B410026137A /* MusicTableViewCell.swift in Sources */,
 				688BE2632C5BCDB5003720AD /* TimerModel.swift in Sources */,
 				688BE2682C5BDE24003720AD /* TemplateTableViewCell.swift in Sources */,
 				68D8EF6E2C5EB32400075202 /* SetupTimerViewController.swift in Sources */,

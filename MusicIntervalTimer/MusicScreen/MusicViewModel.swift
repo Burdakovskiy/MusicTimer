@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import AVFoundation
 
 final class MusicViewModel {
     private(set) var tracks: [Track] = []
+    var onTrackUpdated: (() -> Void)?
     
     func addTrack(_ track: Track) {
         tracks.append(track)
+        onTrackUpdated?()
     }
     
     func track(at index: Int) -> Track {
@@ -22,7 +25,25 @@ final class MusicViewModel {
         return tracks.count
     }
     
-    func deleteTrack(at index: Int) {
-        tracks.remove(at: index)
+    func addTrack(from url: URL) {
+        guard FileManager.default.fileExists(atPath: url.path) else {
+            print("File not available locally: \(url)")
+            return
+        }
+        
+        guard url.pathExtension.lowercased() == "mp3" || url.pathExtension.lowercased() == "m4a" else {
+            print("Unsupported file format: \(url.pathExtension)")
+            return
+        }
+        let asset = AVAsset(url: url)
+        let duration = CMTimeGetSeconds(asset.duration)
+        let track = Track(title: url.lastPathComponent, duration: duration, fileURL: url)
+        addTrack(track)
     }
+    
+    //TODO: -
+//    func deleteTrack(at index: Int) {
+//        tracks.remove(at: index)
+//        onTrackUpdated?()
+//    }
 }

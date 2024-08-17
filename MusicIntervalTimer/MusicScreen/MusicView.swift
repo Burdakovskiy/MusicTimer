@@ -18,8 +18,8 @@ final class MusicView: UIView {
     
     private let tracksTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(TrackTableViewCell.self,
-                           forCellReuseIdentifier: TrackTableViewCell.cellId)
+        tableView.register(MusicTableViewCell.self,
+                           forCellReuseIdentifier: MusicTableViewCell.cellId)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
