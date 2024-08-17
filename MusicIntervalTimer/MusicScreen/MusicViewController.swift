@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class MusicViewController: UIViewController {
+final class MusicViewController: UIViewController {
     
     var onTracksSelected: (([Track]) -> Void)?
     
