@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class TimerViewController: UIViewController {
+final class TimerViewController: UIViewController {
     
     public var isTemplate = false
     public var timerModel: TimerModel!

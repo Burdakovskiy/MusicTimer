@@ -19,7 +19,7 @@ class MusicViewController: UIViewController {
         super.loadView()
         view = musicView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -35,15 +35,15 @@ class MusicViewController: UIViewController {
         navigationItem.hidesBackButton = true
         title = "Tracks"
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
-                                                            target: self,
-                                                            action: #selector(doneButtonPressed))
+                                         target: self,
+                                         action: #selector(doneButtonPressed))
         let addButton =  UIBarButtonItem(barButtonSystemItem: .add,
-                                                            target: self,
-                                                            action: #selector(addTrackPressed))
+                                         target: self,
+                                         action: #selector(addTrackPressed))
         navigationItem.rightBarButtonItems = [doneButton, addButton]
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                                            target: self,
-                                                            action: #selector(cancelButtonPressed))
+                                                           target: self,
+                                                           action: #selector(cancelButtonPressed))
     }
     
     @objc func addTrackPressed() {
@@ -90,20 +90,20 @@ extension MusicViewController: UIDocumentPickerDelegate {
         }
     }
     
-        private func addTrack(from url: URL) {
-            guard FileManager.default.fileExists(atPath: url.path) else {
-                    print("File not available locally: \(url)")
-                    return
-            }
-    
-            guard url.pathExtension.lowercased() == "mp3" || url.pathExtension.lowercased() == "m4a" else {
-                print("Unsupported file format: \(url.pathExtension)")
-                return
-            }
-            let asset = AVAsset(url: url)
-            let duration = CMTimeGetSeconds(asset.duration)
-            let track = Track(title: url.lastPathComponent, duration: duration, fileURL: url)
-            musicViewModel.addTrack(track)
-            musicView.reloadTracksTableView()
+    private func addTrack(from url: URL) {
+        guard FileManager.default.fileExists(atPath: url.path) else {
+            print("File not available locally: \(url)")
+            return
         }
+        
+        guard url.pathExtension.lowercased() == "mp3" || url.pathExtension.lowercased() == "m4a" else {
+            print("Unsupported file format: \(url.pathExtension)")
+            return
+        }
+        let asset = AVAsset(url: url)
+        let duration = CMTimeGetSeconds(asset.duration)
+        let track = Track(title: url.lastPathComponent, duration: duration, fileURL: url)
+        musicViewModel.addTrack(track)
+        musicView.reloadTracksTableView()
+    }
 }
