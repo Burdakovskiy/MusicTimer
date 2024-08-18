@@ -9,27 +9,29 @@ import UIKit
 
 final class TemplateViewModel {
     
+//MARK: - Properties
+    
     private var timerTemplates = [TemplateModel]()
+    var didUpdateTemplates: (() -> Void)?
     
-    public var didUpdateTemplates: (() -> Void)?
+//MARK: - Functions
     
-    public func getTemplates() -> [TemplateModel] {
+    func getTemplates() -> [TemplateModel] {
         return timerTemplates
     }
-    
-    public func loadTemplates() {
+
+    func loadTemplates() {
         self.timerTemplates = TemplateStorage.getTemplates()
         didUpdateTemplates?()
     }
     
-    public func saveTemplate(_ template: TemplateModel) {
+    func saveTemplate(_ template: TemplateModel) {
         TemplateStorage.saveTemplate(template)
         loadTemplates()
     }
     
-    public func deleteTemplate(with id: UUID) {
+    func deleteTemplate(with id: UUID) {
         TemplateStorage.deleteTemplate(with: id)
     }
-    
     //TODO: func updateTemplate(with id: UUID)
 }

@@ -9,6 +9,20 @@ import UIKit
 
 final class TemplateTableViewCell: UITableViewCell {
     
+//MARK: - Initializers
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupViews()
+        setConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+//MARK: - Properties
+    
     private var nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 28, weight: .bold)
@@ -59,14 +73,12 @@ final class TemplateTableViewCell: UITableViewCell {
                                                spacing: 5,
                                                axis: .vertical)
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews()
-        setConstraints()
-    }
+//MARK: - Functions
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func setupViews() {
+        addSubview(nameLabel)
+        addSubview(playButton)
+        addSubview(additionalInfoStack)
     }
     
     func configure(with template: TemplateModel) {
@@ -76,15 +88,14 @@ final class TemplateTableViewCell: UITableViewCell {
         repeatsLabel.text = "R: \(template.timer.repeatsCount)"
         cyclesLabel.text = "C: \(template.timer.cyclesCount)"
     }
-    
-    private func setupViews() {
-        addSubview(nameLabel)
-        addSubview(playButton)
-        addSubview(additionalInfoStack)
-    }
-    
-    private func setConstraints() {
+}
+
+//MARK: - setConstraints
+private extension TemplateTableViewCell {
+    func setConstraints() {
+        
         additionalInfoStack.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             playButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             playButton.widthAnchor.constraint(equalToConstant: 80),

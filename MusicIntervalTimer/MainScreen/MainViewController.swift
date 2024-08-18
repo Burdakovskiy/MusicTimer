@@ -9,9 +9,7 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
-    private lazy var mainView: MainView = .init(frame: .zero)
-    private var mainViewModel: TemplateViewModel
-    private var templates = [TemplateModel]()
+//MARK: - Initializers
     
     init(mainViewModel: TemplateViewModel) {
         self.mainViewModel = mainViewModel
@@ -20,6 +18,30 @@ final class MainViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+//MARK: - Properties
+    
+    private lazy var mainView: MainView = .init(frame: .zero)
+    private var mainViewModel: TemplateViewModel
+    private var templates = [TemplateModel]()
+    
+//MARK: - Functions
+    
+    private func loadTemplates() {
+        mainViewModel.didUpdateTemplates = {[weak self] in
+            guard let self else { return }
+            templates = mainViewModel.getTemplates()
+            self.mainView.reloadTemplatesTableView()
+            mainView.isHideEmptyLabel(!templates.isEmpty)
+        }
+        mainViewModel.loadTemplates()
+    }
+    
+    private func setupDelegates() {
+        mainView.newTimerActionDelegate = self
+        mainView.setTableViewDelegate(self)
+        mainView.setTableViewDataSource(self)
     }
     
     override func loadView() {
@@ -37,24 +59,10 @@ final class MainViewController: UIViewController {
         title = "Main"
         setupDelegates()
     }
-    
-    private func loadTemplates() {
-        mainViewModel.didUpdateTemplates = {[weak self] in
-            guard let self else { return }
-            templates = mainViewModel.getTemplates()
-            self.mainView.reloadTemplatesTableView()
-            mainView.isHideEmptyLabel(!templates.isEmpty)
-        }
-        mainViewModel.loadTemplates()
-    }
-
-    private func setupDelegates() {
-        mainView.newTimerActionDelegate = self
-        mainView.setTableViewDelegate(self)
-        mainView.setTableViewDataSource(self)
-    }
 }
 
+
+//MARK: - NewTimerButtonAction
 extension MainViewController: NewTimerButtonAction {
     func newTimerButtonAction() {
         let setupTimerVC = SetupTimerViewController()
@@ -62,6 +70,7 @@ extension MainViewController: NewTimerButtonAction {
     }
 }
 
+//MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chosenTemplate = templates[indexPath.row]
@@ -78,6 +87,7 @@ extension MainViewController: UITableViewDelegate {
     }
 }
 
+//MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return templates.count
@@ -92,6 +102,7 @@ extension MainViewController: UITableViewDataSource {
         }
         return UITableViewCell()
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let templateToDelete = templates[indexPath.row]

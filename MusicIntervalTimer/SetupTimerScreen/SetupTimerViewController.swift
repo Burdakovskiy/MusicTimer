@@ -9,9 +9,19 @@ import UIKit
 
 final class SetupTimerViewController: UIViewController {
     
+//MARK: - Properties
+    
     private let setupView = SetupTimerView(frame: .zero)
     private let setupViewModel = SetupTimerViewModel()
     private var tracks: [Track] = []
+    
+    
+//MARK: - Functions
+    
+    private func setupDelegates() {
+        setupView.buttonActionsDelegate = self
+        setupView.setPickerViewDelegate(self)
+    }
     
     override func loadView() {
         super.loadView()
@@ -22,13 +32,9 @@ final class SetupTimerViewController: UIViewController {
         super.viewDidLoad()
         setupDelegates()
     }
-    
-    private func setupDelegates() {
-        setupView.buttonActionsDelegate = self
-        setupView.setPickerViewDelegate(self)
-    }
 }
 
+//MARK: - ButtonActions
 extension SetupTimerViewController: ButtonActions {
     func startNextButtonAction(with data: (workTime: String,
                                            restTime: String,
@@ -43,7 +49,6 @@ extension SetupTimerViewController: ButtonActions {
         }
     }
     
-    
     func addMusicButtonAction() {
         let musicVC = MusicViewController()
         musicVC.onTracksSelected = {[weak self] tracks in
@@ -54,6 +59,7 @@ extension SetupTimerViewController: ButtonActions {
     }
 }
 
+//MARK: - UIPickerViewDelegate
 extension SetupTimerViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

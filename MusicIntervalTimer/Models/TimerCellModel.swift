@@ -7,15 +7,15 @@
 
 import UIKit
 
-
-enum TimerCellType {
-    case work
-    case rest
-    case round
-    case cycle
-}
-
 struct TimerCellModel {
+    
+    enum TimerCellType {
+        case work
+        case rest
+        case round
+        case cycle
+    }
+    
     let name: String
     let time: String
     let type: TimerCellType

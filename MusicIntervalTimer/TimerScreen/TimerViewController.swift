@@ -10,52 +10,23 @@ import AVFoundation
 
 final class TimerViewController: UIViewController {
     
-    public var isTemplate = false
-    public var timerModel: TimerModel!
-    public var timerName: String?
-    public var tracks: [Track] = []
+//MARK: - Properties
     
     private let timerView = TimerView(frame: .zero)
     private var timerViewModel: TimerViewModel!
     private let alertsFactory = AlertsFactory()
     
-    override func loadView() {
-        super.loadView()
-        view = timerView
-    }
+    var isTemplate = false
+    var timerModel: TimerModel!
+    var timerName: String?
+    var tracks: [Track] = []
+    
+//MARK: - Functions
     
     private func setupDelegates() {
         timerView.setTableViewDelegate(self)
         timerView.setTableViewDataSource(self)
         timerView.audioButtonActionsDelegate = self
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupDelegates()
-        setupTimerViewModel()
-        if timerName != nil {
-            title = timerName
-        }
-        if !isTemplate {
-            setupNavigationBar()
-        }
-        
-        if !tracks.isEmpty {
-            timerViewModel.activateAudio()
-        } else {
-            timerView.hideAudioView()
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        timerViewModel.startIdlePhase()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        timerViewModel.stopTimer()
     }
     
     private func setupTimerViewModel() {
@@ -64,18 +35,6 @@ final class TimerViewController: UIViewController {
         timerViewModel.onLoadTrack = {[weak self] track in
             guard let self else { return }
             timerView.configureTrackInfo(with: track.title)
-        }
-        
-        timerViewModel.onUpdateTableView = {[weak self] currentCount, currentTimerCellModel in
-            guard let self else { return }
-            timerView.reloadData()
-            DispatchQueue.main.async {
-                if currentCount > 0 && currentCount <= currentTimerCellModel.count {
-                    let indexPath = IndexPath(row: currentCount, section: 0)
-                    self.timerView.scrollTo(row: indexPath)
-                }
-            }
-            
         }
         
         timerViewModel.onPlayerCreated = {[weak self] player in
@@ -107,6 +66,17 @@ final class TimerViewController: UIViewController {
             timerView.setTimerAnimation(duration: duration)
             timerView.startBasicAnimation()
         }
+        
+        timerViewModel.onUpdateTableView = {[weak self] currentCount, currentTimerCellModel in
+            guard let self else { return }
+            timerView.reloadData()
+            DispatchQueue.main.async {
+                if currentCount > 0 && currentCount <= currentTimerCellModel.count {
+                    let indexPath = IndexPath(row: currentCount, section: 0)
+                    self.timerView.scrollTo(row: indexPath)
+                }
+            }
+        }
     }
     
     private func setupNavigationBar() {
@@ -129,10 +99,46 @@ final class TimerViewController: UIViewController {
         }))
         present(alert, animated: true)
     }
+    
+    override func loadView() {
+        super.loadView()
+        view = timerView
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        timerViewModel.startIdlePhase()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupDelegates()
+        setupTimerViewModel()
+        if timerName != nil {
+            title = timerName
+        }
+        if !isTemplate {
+            setupNavigationBar()
+        }
+        
+        if !tracks.isEmpty {
+            timerViewModel.activateAudio()
+        } else {
+            timerView.hideAudioView()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timerViewModel.stopTimer()
+    }
 }
 
+//MARK: - UITableViewDelegate
 extension TimerViewController: UITableViewDelegate {}
 
+
+//MARK: - UITableViewDataSource
 extension TimerViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timerViewModel.currentTimerCellModel.count
@@ -146,6 +152,7 @@ extension TimerViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - AudioButtonActions
 extension TimerViewController: AudioButtonActions {
     func shuffleButtonAction() {
         timerViewModel.toggleShuffle()
@@ -168,6 +175,7 @@ extension TimerViewController: AudioButtonActions {
     }
 }
 
+//MARK: - AVAudioPlayerDelegate
 extension TimerViewController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if flag {

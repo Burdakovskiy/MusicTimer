@@ -10,12 +10,7 @@ import UIKit
 
 final class MusicTableViewCell: UITableViewCell {
     
-    private var nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 22)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+//MARK: - Initializers
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,15 +22,29 @@ final class MusicTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with track: Track) {
-        nameLabel.text = track.title
-    }
+//MARK: - Properties
+    
+    private var nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 22)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+//MARK: - Functions
     
     private func setupViews() {
         addSubview(nameLabel)
     }
     
-    private func setConstraints() {
+    func configure(with track: Track) {
+        nameLabel.text = track.title
+    }
+}
+
+//MARK: - setConstraints
+private extension MusicTableViewCell {
+    func setConstraints() {
         NSLayoutConstraint.activate([
             nameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             nameLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 32)

@@ -7,14 +7,21 @@
 
 import UIKit
 
-class TimerTableViewCell: UITableViewCell {
+final class TimerTableViewCell: UITableViewCell {
 
+//MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         addViews()
         setConstraints()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+//MARK: - Properties
     
     private let numberLabel: UILabel = {
         let label = UILabel()
@@ -37,9 +44,7 @@ class TimerTableViewCell: UITableViewCell {
         return label
     }()
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//MARK: - Functions
     
     private func addViews() {
         self.contentView.addSubview(numberLabel)
@@ -47,14 +52,17 @@ class TimerTableViewCell: UITableViewCell {
         self.contentView.addSubview(timeLabel)
     }
     
-    public func configure(with model: TimerCellModel, index: Int) {
+    func configure(with model: TimerCellModel, index: Int) {
         numberLabel.text = String(index + 1) + "."
         descriptionLabel.text = model.name
         timeLabel.text = model.time
         backgroundColor = model.color
     }
-    
-    private func setConstraints() {
+}
+
+//MARK: - setConstraints
+private extension TimerTableViewCell {
+    func setConstraints() {
         NSLayoutConstraint.activate([
             numberLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             numberLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),

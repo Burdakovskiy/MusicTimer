@@ -7,6 +7,8 @@
 
 import UIKit
 
+//MARK: - ButtonActions Protocol
+
 protocol ButtonActions: AnyObject {
     func startNextButtonAction(with data: (workTime: String,
                                            restTime: String,
@@ -15,35 +17,34 @@ protocol ButtonActions: AnyObject {
     func addMusicButtonAction()
 }
 
-enum TextFieldType {
-    case work
-    case rest
-    case none
-}
-
 final class SetupTimerView: UIView {
     
+//MARK: - Enums
     
-    weak var buttonActionsDelegate: ButtonActions?
-    private var activeTF: UITextField?
-    
-    private var isFieldsCorrect = false {
-        didSet {
-            setStartButtonAppearance(for: isFieldsCorrect)
-        }
+    enum TextFieldType {
+        case work
+        case rest
+        case none
     }
     
-    private var isUniqueCycles = false
- 
-    public var getActiveTFType: TextFieldType {
-        if activeTF == workTF {
-            return .work
-        } else if activeTF == restTF {
-            return .rest
-        }
-        return .none
+//MARK: - Initializers
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .white
+        addViews()
+        setConstraints()
+        addActions()
+        setupDelegates()
+        
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+//MARK: - Properties
+
     private let backward = UIImage(systemName: "chevron.backward")!
     private let forward = UIImage(systemName: "chevron.forward")!
     private let workPicker = UIPickerView()
@@ -57,17 +58,25 @@ final class SetupTimerView: UIView {
     private let repeatCountLabel = UILabel(text: "Repeat count", fontSize: 22)
     private let cyclesCountLabel = UILabel(text: "Cycles count", fontSize: 22)
     private let isUniqueCyclesLabel = UILabel(text: "Unique cycles?", fontSize: 22)
+    
     private lazy var repeatDownButton = UIButton(backgroundImage: backward, width: 20)
     private lazy var repeatUpButton = UIButton(backgroundImage: forward, width: 20)
     private lazy var cyclesDownButton = UIButton(backgroundImage: backward, width: 20)
     private lazy var cyclesUpButton = UIButton(backgroundImage: forward, width: 20)
     
+    private var isUniqueCycles = false
+    private var activeTF: UITextField?
+    private var isFieldsCorrect = false {
+        didSet {
+            setStartButtonAppearance(for: isFieldsCorrect)
+        }
+    }
     private lazy var workStackView = UIStackView(arrangedSubviews: [workTimeLabel,
                                                                     workTF,
                                                                     spacer],
                                                  spacing: 8,
                                                  axis: .horizontal)
-    
+
     private lazy var restStackView = UIStackView(arrangedSubviews: [restTimeLabel,
                                                                     restTF,
                                                                     spacer],
@@ -140,23 +149,24 @@ final class SetupTimerView: UIView {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .white
-        addViews()
-        setConstraints()
-        addActions()
-        setupDelegates()
-        
+    weak var buttonActionsDelegate: ButtonActions?
+    
+    var getActiveTFType: TextFieldType {
+        if activeTF == workTF {
+            return .work
+        } else if activeTF == restTF {
+            return .rest
+        }
+        return .none
     }
+    
+//MARK: - Functions
     
     private func setupDelegates() {
         workPicker.dataSource = self
         restPicker.dataSource = self
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        workTF.delegate = self
+        restTF.delegate = self
     }
     
     private func addViews() {
@@ -193,30 +203,48 @@ final class SetupTimerView: UIView {
         self.addGestureRecognizer(recognizer)
         
         workTF.inputView = workPicker
-        workTF.delegate = self
         restTF.inputView = restPicker
-        restTF.delegate = self
     }
     
-    @objc func viewDidTap() {
+    private func getDataFromFields() -> (workTime: String,
+                                         restTime: String,
+                                         repeats: Int,
+                                         cycles: Int)? {
+        guard let workTime = workTF.text else {
+            print("Error while getting workTime in SetupTimerView.getDataFromFields")
+            return nil
+        }
+        guard let restTime = restTF.text else {
+            print("Error while getting restTime in SetupTimerView.getDataFromFields")
+            return nil
+        }
+        guard let text = repeatTF.text, let repeats = Int(text) else {
+            print("Error while getting repeat count in SetupTimerView.getDataFromFields")
+            return nil
+        }
+        guard let text = cyclesTF.text, let cycles = Int(text) else {
+            print("Error while getting cycles count in SetupTimerView.getDataFromFields")
+            return nil
+        }
+        return (workTime: workTime,
+                restTime: restTime,
+                repeats: repeats,
+                cycles: cycles)
+    }
+    
+    private func setStartButtonAppearance(for state: Bool) {
+        if state {
+            startNextButton.backgroundColor = .systemGreen
+            startNextButton.setTitleColor(.white, for: .normal)
+        } else {
+            startNextButton.backgroundColor = .white
+            startNextButton.setTitleColor(.lightGray, for: .normal)
+        }
+        startNextButton.isEnabled = state
+    }
+    
+    @objc private func viewDidTap() {
         self.endEditing(true)
-    }
-    
-    public func setPickerViewDelegate(_ delegate: UIPickerViewDelegate) {
-        workPicker.delegate = delegate
-        restPicker.delegate = delegate
-    }
-    
-    public func setWork(time: String) {
-        workTF.text = time
-    }
-    
-    public func setRest(time: String) {
-        restTF.text = time
-    }
-    
-    public func checkCorrectFields(isCorrect: Bool) {
-        isFieldsCorrect = isCorrect
     }
     
     @objc private func isUniqueSwitcherChanged() {
@@ -247,32 +275,6 @@ final class SetupTimerView: UIView {
         cyclesTF.text = String(newCount)
     }
     
-    private func getDataFromFields() -> (workTime: String,
-                                         restTime: String,
-                                         repeats: Int,
-                                         cycles: Int)? {
-        guard let workTime = workTF.text else {
-            print("Error while getting workTime in SetupTimerView.getDataFromFields")
-            return nil
-        }
-        guard let restTime = restTF.text else {
-            print("Error while getting restTime in SetupTimerView.getDataFromFields")
-            return nil
-        }
-        guard let text = repeatTF.text, let repeats = Int(text) else {
-            print("Error while getting repeat count in SetupTimerView.getDataFromFields")
-            return nil
-        }
-        guard let text = cyclesTF.text, let cycles = Int(text) else {
-            print("Error while getting cycles count in SetupTimerView.getDataFromFields")
-            return nil
-        }
-        return (workTime: workTime,
-                restTime: restTime,
-                repeats: repeats,
-                cycles: cycles)
-    }
-    
     @objc private func startNextButtonPressed() {
         buttonActionsDelegate?.startNextButtonAction(with: getDataFromFields())
     }
@@ -281,20 +283,31 @@ final class SetupTimerView: UIView {
         buttonActionsDelegate?.addMusicButtonAction()
     }
     
-    private func setStartButtonAppearance(for state: Bool) {
-        if state {
-            startNextButton.backgroundColor = .systemGreen
-            startNextButton.setTitleColor(.white, for: .normal)
-        } else {
-            startNextButton.backgroundColor = .white
-            startNextButton.setTitleColor(.lightGray, for: .normal)
-        }
-        startNextButton.isEnabled = state
+    func setPickerViewDelegate(_ delegate: UIPickerViewDelegate) {
+        workPicker.delegate = delegate
+        restPicker.delegate = delegate
     }
     
-    private func setConstraints() {
+    func setWork(time: String) {
+        workTF.text = time
+    }
+    
+    func setRest(time: String) {
+        restTF.text = time
+    }
+    
+    func checkCorrectFields(isCorrect: Bool) {
+        isFieldsCorrect = isCorrect
+    }
+}
+
+//MARK: - setConstraints
+private extension SetupTimerView {
+    func setConstraints() {
+        
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         isUniqueStackView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
             mainStackView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 32),
@@ -318,6 +331,7 @@ final class SetupTimerView: UIView {
     }
 }
 
+//MARK: - UIPickerViewDataSource
 extension SetupTimerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
@@ -328,6 +342,7 @@ extension SetupTimerView: UIPickerViewDataSource {
     }
 }
 
+//MARK: - UITextFieldDelegate
 extension SetupTimerView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return false

@@ -12,8 +12,21 @@ protocol NewTimerButtonAction: AnyObject {
 }
 
 final class MainView: UIView {
+
+//MARK: - Initializers
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .white
+        addViews()
+        setConstraints()
+        addActions()
+    }
     
-    public weak var newTimerActionDelegate: NewTimerButtonAction?
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+//MARK: - Properties
     
     private let newTimerButton: UIButton = {
         let button = UIButton()
@@ -53,37 +66,9 @@ final class MainView: UIView {
         return label
     }()
     
-    public func reloadTemplatesTableView() {
-        templatesTableView.reloadData()
-    }
+    weak var newTimerActionDelegate: NewTimerButtonAction?
     
-    public func deleteTemplate(at indexPath: IndexPath) {
-        templatesTableView.deleteRows(at: [indexPath], with: .fade)
-    }
-    
-    public func isHideEmptyLabel(_ isHide: Bool) {
-        emptyTemplateLabel.isHidden = isHide
-    }
-    
-    public func setTableViewDelegate(_ delegate: UITableViewDelegate) {
-        templatesTableView.delegate = delegate
-    }
-    
-    public func setTableViewDataSource(_ dataSource: UITableViewDataSource) {
-        templatesTableView.dataSource = dataSource
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .white
-        addViews()
-        setConstraints()
-        addActions()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//MARK: - Functions
     
     private func addViews() {
         addSubview(newTimerButton)
@@ -91,8 +76,41 @@ final class MainView: UIView {
         addSubview(templatesTableView)
         addSubview(emptyTemplateLabel)
     }
+    
+    private func addActions() {
+        newTimerButton.addTarget(self,
+                                 action: #selector(newTimerButtonPressed),
+                                 for: .touchUpInside)
+    }
+    
+    @objc private func newTimerButtonPressed() {
+        newTimerActionDelegate?.newTimerButtonAction()
+    }
+    
+    func reloadTemplatesTableView() {
+        templatesTableView.reloadData()
+    }
+    
+    func deleteTemplate(at indexPath: IndexPath) {
+        templatesTableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
+    func isHideEmptyLabel(_ isHide: Bool) {
+        emptyTemplateLabel.isHidden = isHide
+    }
+    
+    func setTableViewDelegate(_ delegate: UITableViewDelegate) {
+        templatesTableView.delegate = delegate
+    }
+    
+    func setTableViewDataSource(_ dataSource: UITableViewDataSource) {
+        templatesTableView.dataSource = dataSource
+    }
+}
 
-    private func setConstraints() {
+//MARK: - setConstraints
+private extension MainView {
+    func setConstraints() {
         NSLayoutConstraint.activate([
             newTimerButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             newTimerButton.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 32),
@@ -111,15 +129,5 @@ final class MainView: UIView {
             emptyTemplateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             emptyTemplateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
-    }
-    
-    private func addActions() {
-        newTimerButton.addTarget(self,
-                                 action: #selector(newTimerButtonPressed),
-                                 for: .touchUpInside)
-    }
-    
-    @objc private func newTimerButtonPressed() {
-        newTimerActionDelegate?.newTimerButtonAction()
     }
 }

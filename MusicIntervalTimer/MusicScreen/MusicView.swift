@@ -9,12 +9,20 @@ import UIKit
 
 final class MusicView: UIView {
     
+//MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         addViews()
         setConstraints()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+//MARK: - Properties
     
     private let tracksTableView: UITableView = {
         let tableView = UITableView()
@@ -24,28 +32,28 @@ final class MusicView: UIView {
         return tableView
     }()
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//MARK: - Functions
     
     private func addViews() {
         addSubview(tracksTableView)
     }
     
-    public func reloadTracksTableView() {
+    func reloadTracksTableView() {
         tracksTableView.reloadData()
     }
     
-    public func setTableViewDelegate(_ delegate: UITableViewDelegate) {
+    func setTableViewDelegate(_ delegate: UITableViewDelegate) {
         tracksTableView.delegate = delegate
     }
     
-    public func setTableViewDataSource(_ dataSource: UITableViewDataSource) {
+    func setTableViewDataSource(_ dataSource: UITableViewDataSource) {
         tracksTableView.dataSource = dataSource
     }
-   
-    
-    private func setConstraints() {
+}
+
+//MARK: - setConstraints
+private extension MusicView {
+    func setConstraints() {
         NSLayoutConstraint.activate([
             tracksTableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             tracksTableView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor),

@@ -11,7 +11,7 @@ import UIKit
 final class TemplateStorage {
     private static let templatesKey = "savedTemplates"
     
-    public static func saveTemplate(_ template: TemplateModel) {
+    static func saveTemplate(_ template: TemplateModel) {
         var templates = getTemplates()
         templates.append(template)
         if let data = try? JSONEncoder().encode(templates) {
@@ -19,7 +19,7 @@ final class TemplateStorage {
         }
     }
     
-    public static func getTemplates() -> [TemplateModel] {
+    static func getTemplates() -> [TemplateModel] {
         guard let data = UserDefaults.standard.data(forKey: templatesKey),
               let templates = try? JSONDecoder().decode([TemplateModel].self, from: data) else {
             print("Error while getting templates in TemplateStorage.getTemplates() or templates is Empty")
@@ -28,7 +28,7 @@ final class TemplateStorage {
         return templates
     }
     
-    public static func deleteTemplate(with id: UUID)  {
+    static func deleteTemplate(with id: UUID)  {
         var templates = getTemplates()
         templates.removeAll { template in
             template.timer.id == id

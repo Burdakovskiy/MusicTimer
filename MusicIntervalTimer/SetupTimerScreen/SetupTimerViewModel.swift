@@ -8,6 +8,9 @@
 import Foundation
 
 final class SetupTimerViewModel {
+    
+//MARK: - Properties
+    
     private var workMinutes = 0
     private var workSeconds = 0
     private var restMinutes = 0
@@ -20,6 +23,8 @@ final class SetupTimerViewModel {
     private var isRestFieldSetup: Bool {
         return restMinutes != 0 || restSeconds != 0
     }
+
+//MARK: - Functions
     
     private func getTimeInSeconds(for time: String) -> Int {
         let splittedTime = time.split(separator: ":")
@@ -30,19 +35,39 @@ final class SetupTimerViewModel {
         return (min * 60) + sec
     }
     
-    public func getTimeString(minutes: Int, seconds: Int) -> String {
+    func getTimeString(minutes: Int, seconds: Int) -> String {
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
-    public func getWorkTimeString() -> String {
+    func getWorkTimeString() -> String {
         return getTimeString(minutes: workMinutes, seconds: workSeconds)
     }
     
-    public func getRestTimeString() -> String {
+    func getRestTimeString() -> String {
         return getTimeString(minutes: restMinutes, seconds: restSeconds)
     }
     
-    public func createTimer(from data: (workTime: String, restTime: String, repeats: Int, cycles: Int)) -> TimerModel {
+    func updateWork(minutes: Int) {
+        self.workMinutes = minutes
+    }
+    
+    func updateWork(seconds: Int) {
+        self.workSeconds = seconds
+    }
+    
+    func updateRest(minutes: Int) {
+        self.restMinutes = minutes
+    }
+    
+    func updateRest(seconds: Int) {
+        self.restSeconds = seconds
+    }
+    
+    func checkSettingUpFields() -> Bool {
+        return isWorkFieldSetup && isRestFieldSetup
+    }
+    
+    func createTimer(from data: (workTime: String, restTime: String, repeats: Int, cycles: Int)) -> TimerModel {
         let workTime = getTimeInSeconds(for: data.workTime)
         let restTime = getTimeInSeconds(for: data.restTime)
         
@@ -54,26 +79,5 @@ final class SetupTimerViewModel {
                           currentCycle: 1,
                           workingState: .none,
                           state: .none)
-    }
-    
-    
-    public func updateWork(minutes: Int) {
-        self.workMinutes = minutes
-    }
-    
-    public func updateWork(seconds: Int) {
-        self.workSeconds = seconds
-    }
-    
-    public func updateRest(minutes: Int) {
-        self.restMinutes = minutes
-    }
-    
-    public func updateRest(seconds: Int) {
-        self.restSeconds = seconds
-    }
-    
-    public func checkSettingUpFields() -> Bool {
-        return isWorkFieldSetup && isRestFieldSetup
     }
 }

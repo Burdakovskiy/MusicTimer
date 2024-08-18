@@ -7,6 +7,7 @@
 
 import UIKit
 
+//MARK: - AudioButtonActions Protocol
 protocol AudioButtonActions: AnyObject {
     func shuffleButtonAction()
     func repeatButtonAction()
@@ -17,12 +18,27 @@ protocol AudioButtonActions: AnyObject {
 
 final class TimerView: UIView {
     
+//MARK: - Initializers
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .white
+        addViews()
+        setConstraints()
+        setupActions()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+//MARK: - Properties
+    
     private let shapeLayer = CAShapeLayer()
     private var timerAnimationDuration = 0
     private var isAudioViewExpanded = false
     private var audioViewHeightConstraint: NSLayoutConstraint!
     private var tableViewTopConstraint: NSLayoutConstraint!
-    weak var audioButtonActionsDelegate: AudioButtonActions?
     
     private let timerLabel: UILabel = {
         let label = UILabel()
@@ -116,20 +132,15 @@ final class TimerView: UIView {
         return tableView
     }()
     
+    weak var audioButtonActionsDelegate: AudioButtonActions?
     lazy var audioPlayerBarStackView = UIStackView(arrangedSubviews: [backwardButton,
                                                                       stopPlayButton,
                                                                       forwardButton],
                                                    spacing: 30,
                                                    axis: .horizontal,
                                                    distribution: .fillEqually)
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .white
-        addViews()
-        setConstraints()
-        setupActions()
-    }
+
+//MARK: - Functions
     
     private func setupActions() {
         audioViewShrinkButton.addTarget(self, action: #selector(didTapShrinkButton), for: .touchUpInside)
@@ -138,69 +149,6 @@ final class TimerView: UIView {
         stopPlayButton.addTarget(self, action: #selector(stopPlayButtonPressed), for: .touchUpInside)
         backwardButton.addTarget(self, action: #selector(backwardButtonPressed), for: .touchUpInside)
         forwardButton.addTarget(self, action: #selector(forwardButtonPressed), for: .touchUpInside)
-    }
-    
-    @objc private func repeatButtonPressed() {
-        audioButtonActionsDelegate?.repeatButtonAction()
-    }
-    
-    @objc private func shuffleButtonPressed() {
-        audioButtonActionsDelegate?.shuffleButtonAction()
-    }
-    
-    @objc private func stopPlayButtonPressed() {
-        audioButtonActionsDelegate?.stopPlayButtonAction()
-    }
-    
-    @objc private func backwardButtonPressed() {
-        audioButtonActionsDelegate?.backwardButtonAction()
-    }
-    
-    @objc private func forwardButtonPressed() {
-        audioButtonActionsDelegate?.forwardButtonAction()
-    }
-    
-    public func configureTrackInfo(with track: String) {
-        audioNameLabel.text = track
-    }
-    
-    public func updateIsShufflingButtonAppearence(with state: Bool) {
-        if state {
-            shuffleButton.tintColor = .purple
-        } else {
-            shuffleButton.tintColor = .black
-        }
-    }
-    
-    public func updateIsPlayingButtonAppearence(with state: Bool) {
-        if state {
-            stopPlayButton.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
-        } else {
-            stopPlayButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
-        }
-    }
-    
-    public func updateIsRepeatingButtonAppearence(with state: Bool) {
-        if state {
-            repeatButton.tintColor = .purple
-        } else {
-            repeatButton.tintColor = .black
-        }
-    }
-    
-    public func hideAudioView() {
-        audioView.isHidden = true
-        audioViewHeightConstraint.constant = 0
-        tableViewTopConstraint = timerTableView.topAnchor.constraint(equalTo: circularImage.bottomAnchor)
-        self.layoutIfNeeded()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc private func didTapShrinkButton() {
-        toggleAudioView()
     }
     
     private func toggleAudioView() {
@@ -224,7 +172,6 @@ final class TimerView: UIView {
         audioView.addSubview(shuffleButton)
         audioView.addSubview(repeatButton)
         audioView.addSubview(audioViewShrinkButton)
-        
         updateIsHiddenAudioBar(with: isAudioViewExpanded)
     }
     
@@ -233,25 +180,18 @@ final class TimerView: UIView {
         shuffleButton.isHidden = !state
         repeatButton.isHidden = !state
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        circularAnimation()
-    }
     
     private func circularAnimation() {
         
         let center = CGPoint(x: circularImage.frame.width / 2,
                              y: circularImage.frame.height / 2)
-        
         let endAngle = (-CGFloat.pi / 2)
         let startAngle = 2 * CGFloat.pi + endAngle
-        
         let circularPath = UIBezierPath(arcCenter: center,
                                         radius: 116,
                                         startAngle: startAngle,
                                         endAngle: endAngle,
                                         clockwise: false)
-        
         shapeLayer.path = circularPath.cgPath
         shapeLayer.lineWidth = 13.5
         shapeLayer.fillColor = UIColor.clear.cgColor
@@ -271,36 +211,103 @@ final class TimerView: UIView {
         shapeLayer.add(animation, forKey: "strokeEnd")
     }
     
-    public func updateTimerLabel(with time: Int, and color: UIColor = .red) {
+    @objc private func repeatButtonPressed() {
+        audioButtonActionsDelegate?.repeatButtonAction()
+    }
+    
+    @objc private func shuffleButtonPressed() {
+        audioButtonActionsDelegate?.shuffleButtonAction()
+    }
+    
+    @objc private func stopPlayButtonPressed() {
+        audioButtonActionsDelegate?.stopPlayButtonAction()
+    }
+    
+    @objc private func backwardButtonPressed() {
+        audioButtonActionsDelegate?.backwardButtonAction()
+    }
+    
+    @objc private func forwardButtonPressed() {
+        audioButtonActionsDelegate?.forwardButtonAction()
+    }
+    
+    @objc private func didTapShrinkButton() {
+        toggleAudioView()
+    }
+    
+    func configureTrackInfo(with track: String) {
+        audioNameLabel.text = track
+    }
+    
+    func updateIsShufflingButtonAppearence(with state: Bool) {
+        if state {
+            shuffleButton.tintColor = .purple
+        } else {
+            shuffleButton.tintColor = .black
+        }
+    }
+    
+    func updateIsPlayingButtonAppearence(with state: Bool) {
+        if state {
+            stopPlayButton.setBackgroundImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            stopPlayButton.setBackgroundImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
+    }
+    
+    func updateIsRepeatingButtonAppearence(with state: Bool) {
+        if state {
+            repeatButton.tintColor = .purple
+        } else {
+            repeatButton.tintColor = .black
+        }
+    }
+    
+    func hideAudioView() {
+        audioView.isHidden = true
+        audioViewHeightConstraint.constant = 0
+        tableViewTopConstraint = timerTableView.topAnchor.constraint(equalTo: circularImage.bottomAnchor)
+        self.layoutIfNeeded()
+    }
+    
+    func updateTimerLabel(with time: Int, and color: UIColor = .red) {
         timerLabel.text = String(time)
         timerLabel.textColor = color
     }
     
-    public func startBasicAnimation() {
+    func startBasicAnimation() {
         basicAnimation()
     }
     
-    public func setTableViewDelegate(_ delegate: UITableViewDelegate) {
+    func setTableViewDelegate(_ delegate: UITableViewDelegate) {
         timerTableView.delegate = delegate
     }
     
-    public func setTableViewDataSource(_ dataSource: UITableViewDataSource) {
+    func setTableViewDataSource(_ dataSource: UITableViewDataSource) {
         timerTableView.dataSource = dataSource
     }
     
-    public func reloadData() {
+    func reloadData() {
         timerTableView.reloadData()
     }
     
-    public func scrollTo(row: IndexPath) {
+    func scrollTo(row: IndexPath) {
         timerTableView.scrollToRow(at: row, at: .bottom, animated: true)
     }
     
-    public func setTimerAnimation(duration: Int) {
+    func setTimerAnimation(duration: Int) {
         timerAnimationDuration = duration
     }
     
-    private func setConstraints() {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        circularAnimation()
+    }
+}
+
+//MARK: - setConstraints
+private extension TimerView {
+    func setConstraints() {
         audioPlayerBarStackView.translatesAutoresizingMaskIntoConstraints = false
         audioViewHeightConstraint = audioView.heightAnchor.constraint(equalToConstant: 40)
         tableViewTopConstraint = timerTableView.topAnchor.constraint(equalTo: audioView.bottomAnchor, constant: 16)

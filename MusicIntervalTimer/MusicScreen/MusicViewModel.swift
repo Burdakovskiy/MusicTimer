@@ -9,8 +9,13 @@ import Foundation
 import AVFoundation
 
 final class MusicViewModel {
+    
+//MARK: - Properties
+    
     private(set) var tracks: [Track] = []
     var onTrackUpdated: (() -> Void)?
+    
+//MARK: - Functions
     
     func addTrack(_ track: Track) {
         tracks.append(track)
@@ -41,7 +46,7 @@ final class MusicViewModel {
         addTrack(track)
     }
     
-    //TODO: -
+    //TODO: DeleteTrack
 //    func deleteTrack(at index: Int) {
 //        tracks.remove(at: index)
 //        onTrackUpdated?()

@@ -9,22 +9,14 @@ import UIKit
 
 final class MusicViewController: UIViewController {
     
-    var onTracksSelected: (([Track]) -> Void)?
+//MARK: - Properties
     
     private let musicView = MusicView(frame: .zero)
     private let musicViewModel = MusicViewModel()
+
+    var onTracksSelected: (([Track]) -> Void)?
     
-    override func loadView() {
-        super.loadView()
-        view = musicView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupNavigationBar()
-        setupDelegates()
-        bindViewModel()
-    }
+//MARK: - Functions
     
     private func setupDelegates() {
         musicView.setTableViewDelegate(self)
@@ -52,7 +44,7 @@ final class MusicViewController: UIViewController {
                                                            target: self,
                                                            action: #selector(cancelButtonPressed))
     }
-    
+
     @objc private func addTrackPressed() {
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.audio],
                                                             asCopy: true)
@@ -69,14 +61,28 @@ final class MusicViewController: UIViewController {
     @objc private func cancelButtonPressed() {
         navigationController?.popViewController(animated: true)
     }
+    
+    override func loadView() {
+        super.loadView()
+        view = musicView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNavigationBar()
+        setupDelegates()
+        bindViewModel()
+    }
 }
 
+//MARK: - UITableViewDelegate
 extension MusicViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
+//MARK: - UITableViewDataSource
 extension MusicViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return musicViewModel.numberOfTracks()
@@ -90,6 +96,7 @@ extension MusicViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - UIDocumentPickerDelegate
 extension MusicViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
