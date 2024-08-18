@@ -34,7 +34,6 @@
 		68D8EF7A2C5EB99D00075202 /* SetupTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF792C5EB99D00075202 /* SetupTimerViewModel.swift */; };
 		68D8EF7C2C5EB9AA00075202 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF7B2C5EB9AA00075202 /* TimerViewController.swift */; };
 		68D8EF7F2C5EB9BF00075202 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF7E2C5EB9BF00075202 /* TimerView.swift */; };
-		68D8EF812C5EB9C800075202 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D8EF802C5EB9C800075202 /* TimerViewModel.swift */; };
 		68DF86862C69B7430026137A /* AlertsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF86852C69B7430026137A /* AlertsFactory.swift */; };
 		68DF86882C6A081D0026137A /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF86872C6A081D0026137A /* TrackModel.swift */; };
 		68DF868A2C6A0B410026137A /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68DF86892C6A0B410026137A /* MusicTableViewCell.swift */; };
@@ -70,7 +69,6 @@
 		68D8EF792C5EB99D00075202 /* SetupTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupTimerViewModel.swift; sourceTree = "<group>"; };
 		68D8EF7B2C5EB9AA00075202 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		68D8EF7E2C5EB9BF00075202 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		68D8EF802C5EB9C800075202 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		68DF86852C69B7430026137A /* AlertsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsFactory.swift; sourceTree = "<group>"; };
 		68DF86872C6A081D0026137A /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
 		68DF86892C6A0B410026137A /* MusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 				68D8EF7B2C5EB9AA00075202 /* TimerViewController.swift */,
 				68D8EF7E2C5EB9BF00075202 /* TimerView.swift */,
 				689BE5482C639B36007EC14B /* TimerTableViewCell.swift */,
-				68D8EF802C5EB9C800075202 /* TimerViewModel.swift */,
 			);
 			path = TimerScreen;
 			sourceTree = "<group>";
@@ -290,7 +287,6 @@
 				689BE5492C639B36007EC14B /* TimerTableViewCell.swift in Sources */,
 				682C76CF2C692D6D00863B16 /* TemplateStorage.swift in Sources */,
 				688BE2482C5B958C003720AD /* AppDelegate.swift in Sources */,
-				68D8EF812C5EB9C800075202 /* TimerViewModel.swift in Sources */,
 				68D8EF712C5EB93500075202 /* SetupTimerView.swift in Sources */,
 				68D8EF7C2C5EB9AA00075202 /* TimerViewController.swift in Sources */,
 				688B42232C611EAE00700213 /* UITextField+Extension.swift in Sources */,
