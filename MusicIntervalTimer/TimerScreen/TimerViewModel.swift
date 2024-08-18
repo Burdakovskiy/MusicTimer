@@ -5,4 +5,9 @@
 //  Created by Дмитрий on 18.08.2024.
 //
 
-import Foundation
+import UIKit
+import AVFoundation
+
+final class TimerViewModel {
+    
+}

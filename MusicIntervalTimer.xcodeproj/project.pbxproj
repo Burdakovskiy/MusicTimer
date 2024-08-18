@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68222DAE2C71C2F00061C37E /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68222DAD2C71C2F00061C37E /* TimerViewModel.swift */; };
 		682C76CF2C692D6D00863B16 /* TemplateStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682C76CE2C692D6D00863B16 /* TemplateStorage.swift */; };
 		688B42232C611EAE00700213 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688B42222C611EAE00700213 /* UITextField+Extension.swift */; };
 		688B42252C61202000700213 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688B42242C61202000700213 /* UILabel+Extension.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68222DAD2C71C2F00061C37E /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		682C76CE2C692D6D00863B16 /* TemplateStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateStorage.swift; sourceTree = "<group>"; };
 		688B42222C611EAE00700213 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		688B42242C61202000700213 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				68D8EF7B2C5EB9AA00075202 /* TimerViewController.swift */,
 				68D8EF7E2C5EB9BF00075202 /* TimerView.swift */,
 				689BE5482C639B36007EC14B /* TimerTableViewCell.swift */,
+				68222DAD2C71C2F00061C37E /* TimerViewModel.swift */,
 			);
 			path = TimerScreen;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				68D8EF6E2C5EB32400075202 /* SetupTimerViewController.swift in Sources */,
 				689BE5492C639B36007EC14B /* TimerTableViewCell.swift in Sources */,
 				682C76CF2C692D6D00863B16 /* TemplateStorage.swift in Sources */,
+				68222DAE2C71C2F00061C37E /* TimerViewModel.swift in Sources */,
 				688BE2482C5B958C003720AD /* AppDelegate.swift in Sources */,
 				68D8EF712C5EB93500075202 /* SetupTimerView.swift in Sources */,
 				68D8EF7C2C5EB9AA00075202 /* TimerViewController.swift in Sources */,
